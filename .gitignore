@@ -1,0 +1,13 @@
+# Compiled files and ROS build artifacts
+build/
+install/
+log/
+
+# Ignore other ROS packages in the src directory
+src/*
+!src/gravity_compensation_pkg/
+
+# IDE settings and temporary files
+.vscode/
+*~
+*.swp
