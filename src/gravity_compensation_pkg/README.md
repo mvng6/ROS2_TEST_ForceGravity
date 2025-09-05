@@ -42,7 +42,6 @@
 
 2.  **이 저장소와 두산 로봇 패키지 클론:**
     ```bash
-    # TODO: 이 주소를 사용자님의 실제 GitHub 저장소 주소로 변경하세요.
     git clone [https://github.com/mvng6/ROS2_TEST_ForceGravity.git](https://github.com/mvng6/ROS2_TEST_ForceGravity.git) 
     git clone -b humble [https://github.com/doosan-robotics/doosan-robot2.git](https://github.com/doosan-robotics/doosan-robot2.git)
     ```
