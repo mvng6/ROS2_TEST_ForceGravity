@@ -32,7 +32,6 @@ public:
         tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
         wrench_publisher_ = this->create_publisher<geometry_msgs::msg::WrenchStamped>("~/gravity_wrench", 10);
         
-        // 타이머 주기를 1초로 늘려서 로그 확인을 쉽게 합니다.
         timer_ = this->create_wall_timer(
             1s, std::bind(&GravityCompNode::timer_callback, this));
 
@@ -71,7 +70,7 @@ private:
         auto wrench_msg = std::make_unique<geometry_msgs::msg::WrenchStamped>();
         wrench_msg->header.stamp = t.header.stamp;
         wrench_msg->header.frame_id = "link_6";
-        wrench_msg->wrench.force.x = gravity_wrench.Fx; // 최종 발행값은 F_gravity.x와 동일
+        wrench_msg->wrench.force.x = gravity_wrench.Fx;
         wrench_msg->wrench.force.y = gravity_wrench.Fy;
         wrench_msg->wrench.force.z = gravity_wrench.Fz;
         wrench_msg->wrench.torque.x = gravity_wrench.Tx;
