@@ -3,7 +3,6 @@
 #include <cmath>
 #include <string>
 
-// Vector3d, Tool, RotationMatrix, Wrench 구조체는 이전과 동일합니다.
 struct Vector3d {
     double x = 0.0, y = 0.0, z = 0.0;
     Vector3d() = default;
@@ -31,8 +30,6 @@ struct Wrench {
 
 
 // -- 수학 함수들 --
-
-// ⭐⭐⭐ 이 함수의 내부 로직이 수정되었습니다! (전치 행렬 곱셈으로 변경) ⭐⭐⭐
 // G_sensor = R_transpose * G_world 계산을 수행
 inline Vector3d MatrixVectorMultiply(const RotationMatrix& R, const Vector3d& v) {
     Vector3d result;
@@ -54,7 +51,7 @@ inline Vector3d VectorCrossProduct(const Vector3d& a, const Vector3d& b) {
 inline Wrench calculateGravityWrench(const RotationMatrix& R, const Tool& tool) {
     const double g = 9.80665;
     Vector3d G_world(0.0, 0.0, -tool.mass * g);
-    Vector3d G_sensor = MatrixVectorMultiply(R, G_world); // 이제 이 함수가 올바른 계산을 합니다.
+    Vector3d G_sensor = MatrixVectorMultiply(R, G_world);
     Vector3d F_gravity(-G_sensor.x, -G_sensor.y, -G_sensor.z);
     Vector3d T_gravity = VectorCrossProduct(tool.centerOfMass, F_gravity);
     Wrench result;
@@ -63,7 +60,7 @@ inline Wrench calculateGravityWrench(const RotationMatrix& R, const Tool& tool) 
     return result;
 }
 
-// 로깅 및 디버깅용 도우미 함수들 (이전과 동일)
+// 로깅 및 디버깅용 도우미 함수
 inline std::string WrenchToString(const Wrench& w) {
     return "Fx: " + std::to_string(w.Fx) + ", Fy: " + std::to_string(w.Fy) + ", Fz: " + std::to_string(w.Fz) +
            ", Tx: " + std::to_string(w.Tx) + ", Ty: " + std::to_string(w.Ty) + ", Tz: " + std::to_string(w.Tz);
